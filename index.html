@@ -62,8 +62,13 @@ this,"is,csv"</textarea>
         </div>
     </section>
     <pre id="error" style="color:red; padding-top:5px"></pre>
-    <button class="bf-btn bf-btn--primary" onclick="onConvertClick()">Convert CSV to code</button>
+    <div style="display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap;">
+        <button style="min-width: 170px;" class="bf-btn bf-btn--primary" onclick="onConvertClick()">Convert CSV to code</button>
+        <input type="file" id="fileEl" multiple style="margin-left:30px;"/>
+        <small style="margin-left: 30px;">You can drop multiple CSV files in this page to load them</small><br/>
+    </div>
 </main>
+<div id="markDropArea" style="display: none; pointer-events: none; position: fixed; top: 1vh; left: 1vw; width: 98vw; height: 98vh; border: 5px dashed #aaa; justify-content: center; align-items: center; font-size: 48px; background-color: rgba(255, 255, 255, 0.7)">Drop File Here</div>
 <!-- CODE IN THIS TOOL DOES NOT FOLLOW BEST PRACTICES -->
 <!-- PROCEED AT YOUR OWN RISK -->
 <script src= "listify.js"></script>
@@ -72,7 +77,14 @@ this,"is,csv"</textarea>
 <script src= "tokenize.js"></script>
 <script src= "persist.js"></script>
 <script src= "script.js"></script>
+<script src= "drag-file.js"></script>
 <style>
+#fileEl {
+    width: 354px;
+    border-radius: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
 textarea {
     tab-size: 4;
     font-family: monospace;
@@ -99,7 +111,7 @@ html,body {
     border: 1px solid #999;
 }
 #main-content {
-    max-width: 70vw;
+    max-width: 75vw;
 }
 @media (max-width: 600px) {
     .input-group {
