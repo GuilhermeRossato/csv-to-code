@@ -3,6 +3,8 @@
 This web app transform a CSV text into interpretable code so that you don't have to load and parse
 the data into a program as it executes and can just load it statically as code.
 
+[Click here to access it.](http://grossato.com/csv-to-code/)
+
 Input:
 
 ```csv
@@ -43,10 +45,8 @@ For quick scripts or processes, loading the data statically and changing when ne
 
 ## License
 
-This tool contains no tracking, no cookie-stuff, no data sending, nothing, but it has important licence: AGPL
+Licence is AGPL-3.0:
 
-You may copy, use, redistribute, change, or whatever with the code in this repository, as long as you don't blame me for misusing the product.
+You may copy, use, redistribute, change with the code in this repository, as long as you don't blame me for  any harm caused by its usage. In case you do modify it or include the source of this repository with other software then you have to publish the source code of said project fully. It is not a violation of this license to use the code produced by this tool freely in any possible, imaginable, scenario, even evil ones, without credits.
 
-If you do modify this to your needs then you shall publish the source code of that software.
-
-Other details can be checked in the LICENSE file.
+Other details can be checked in the [LICENSE.md](https://github.com/GuilhermeRossato/csv-to-code/blob/master/LICENSE.md) file.
