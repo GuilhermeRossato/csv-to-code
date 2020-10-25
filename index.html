@@ -1,0 +1,118 @@
+<!-- CODE IN THIS TOOL DOES NOT FOLLOW BEST PRACTICES -->
+<!-- PROCEED AT YOUR OWN RISK -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bullframe.css">
+<main id="main-content">
+    <h1 style="margin: 50px 0 20px 0;">CSV to Code<small style="margin-left: 10px; font-size: 11px"><a href="https://github.com/GuilhermeRossato/csv-to-code">Github repository (source)</a></small></h1>
+    <div style="margin: 5px -5px 5px -5px; display: flex; flex-wrap: wrap;">
+        <div class="input-group">
+            <label for="language">Target Language</label>
+            <select id="language">
+                <option>PHP</option>
+                <option>JS</option>
+                <option>C/C++ (ASCII)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="columnSeparator">Column Separator</label>
+            <input id="columnSeparator" value="," />
+        </div>
+        <div class="input-group">
+            <label for="lineSeparator">Line Separator</label>
+            <input id="lineSeparator" value="\n" />
+        </div>
+        <div class="input-group">
+            <label for="quoteCharacter">Quote character</label>
+            <input id="quoteCharacter" value="&quot;" />
+        </div>
+        <div class="input-group">
+            <label for="quoteInside">Quote inside quotes</label>
+            <input id="quoteInside" value="&quot;&quot;" />
+        </div>
+        <div class="input-group">
+            <label>Iteration routine</label>
+            <div style="margin-top: 8px;">
+                <input type="checkbox" id="includeLoop" />
+                <label for="includeLoop" style="cursor: pointer">Include for-each loop</label>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Compactness</label>
+            <div style="margin-top: 8px;">
+                <input type="checkbox" id="stripLines" />
+                <label for="stripLines" style="cursor: pointer">Strip all new lines</label>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div style="display: flex; justify-content: stretch">
+            <div style="flex-grow: 1; flex-basis: 40%">
+                <label for="source">Source</label>
+                <textarea wrap="soft" style="width:100%; min-height: 250px;" id="source">hello,world
+this,"is,csv"</textarea>
+            </div>
+            <div style="flex-grow: 1; flex-basis: 59%; margin-left: 10px;">
+                <label for="target">Target</label>
+                <textarea onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}" wrap="soft" style="width:100%; min-height: 250px;" id="target">$data = [
+	[
+		"hello" => "this",
+		"world" => "is,csv"
+	]
+];</textarea>
+            </div>
+        </div>
+    </section>
+    <pre id="error" style="color:red; padding-top:5px"></pre>
+    <button class="bf-btn bf-btn--primary" onclick="onConvertClick()">Convert CSV to code</button>
+</main>
+<!-- CODE IN THIS TOOL DOES NOT FOLLOW BEST PRACTICES -->
+<!-- PROCEED AT YOUR OWN RISK -->
+<script src= "listify.js"></script>
+<script src= "convert.js"></script>
+<script src= "objectify.js"></script>
+<script src= "tokenize.js"></script>
+<script src= "persist.js"></script>
+<script src= "script.js"></script>
+<style>
+textarea {
+    tab-size: 4;
+    font-family: monospace;
+    overflow: auto;
+    white-space: nowrap;
+    transition: 0.2s ease-out background-color;
+}
+html,body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+.input-group {
+    width: 200px;
+    margin: 5px 5px 5px 5px;
+}
+.input-group > label {
+    display: block;
+}
+.input-group input, .input-group select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #999;
+}
+#main-content {
+    max-width: 70vw;
+}
+@media (max-width: 600px) {
+    .input-group {
+        width: auto;
+        max-width: 200px;
+    }
+    .input-group > input, .input-group > select {
+        width: 135px;
+    }
+    #main-content {
+        max-width: 97vw;
+    }
+}
+</style>
+<!-- CODE IN THIS TOOL DOES NOT FOLLOW BEST PRACTICES -->
+<!-- PROCEED AT YOUR OWN RISK -->
