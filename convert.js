@@ -56,22 +56,24 @@ function convert(source, target, language, columnSeparator = ',', lineSeparator 
         if (includeLoop) {
             target.value += `\nfor (let index = 0; index < data.length; index++) {\n\tconsole.log(index);\n\tconst row = data[index];\n\tfor (let key in row) {\n\t\tconsole.log(\`\\t\${key}: \${row[key]}\`);\n\t}\n}\n`;
         }
-    } else if (language === "C/C++ (ASCII)") {
+    } else if (language === "C") {
         const headerCount = headers.length;
         const rowCount = csv.length;
-        let longestString = 0;
+        let longestStringLength = 0;
         for (let row of csv) {
             for (let key in row) {
-                if (longestString.length < key.length) {
-                    longestString.length = key.length;
+                if (longestStringLength < key.length) {
+                    longestStringLength = key.length;
                 }
-                if (longestString.length < row[key].length) {
-                    longestString.length = row[key].length;
+                if (longestStringLength < row[key].length) {
+                    longestStringLength = row[key].length;
                 }
             }
         }
-        target.value = `const char data[${headerCount}][1 + ${rowCount}][${longestString+1}] = {\n`;
-        let isFirstRow = true;
+        if (longestStringLength < 15) {
+            longestStringLength = 15;
+        }
+        target.value = `const char data[${headerCount}][${rowCount + 1}][${longestStringLength + 1}] = {\n`;
         for (let j = 0; j < headers.length; j++) {
             const key = headers[j];
             target.value += `\t{\"${key.replace(/\\/g, "\\\\").replace(/\"/g, "\\\"").replace(/(\n)/g, "\\n")}\",`;
@@ -87,7 +89,7 @@ function convert(source, target, language, columnSeparator = ',', lineSeparator 
             target.value += "\nvoid iterate(void) {\n\tconst static unsigned int row_count = sizeof(data[0]) / sizeof(data[0][0]) - 1;\n\tconst static unsigned int column_count = sizeof(data) / sizeof(data[0]);\n\tunsigned int index, i;\n\tfor (index = 0; index < row_count; index++) {\n\t\tprintf(\"%d\\n\", index);\n\t\tfor (i = 0; i < column_count; i++) {\n\t\t\tconst char * key = data[i][0];\n\t\t\tconst char * value = data[i][index + 1];\n\t\t\tprintf(\"\\t%s = %s\\n\", key, value);\n\t\t}\n\t}\n}\n";
         }
     } else {
-        throw new Error("Unhandled language: " + language);
+        throw new Error("Unhandled language: " + JSON.stringify(language));
     }
     if (stripLines) {
         target.value = target.value.replace(/\n/g, ' ').replace(/\s\s+/g, ' ');

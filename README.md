@@ -1,7 +1,7 @@
 # CSV to Code
 
 This web app transform a CSV text into interpretable code so that you don't have to load and parse
-the data into a program as it executes, but rather load it statically as code.
+the data into a program as it executes and can just load it statically as code.
 
 Input:
 
@@ -23,10 +23,10 @@ const data = [
         "header1": "line2value1",
         "header2": "line2value2",
     }
-]
+];
 ```
 
-Currently supports: PHP, Javascript/NodeJS, C/C++ (ASCII)
+Currently supports: PHP, Javascript/NodeJS, C (ASCII)
 
 ## Why
 
